@@ -1,0 +1,12 @@
+{
+	"name": "son/mvc",
+	"require": {"php": ">= 7.0"},
+	"minimus-stability": "alpha",
+	"authors": [{"name":"Misael Guilhardes de Freitas", "email":"misaelg.freitas2000@gmail.com"}],
+	"autoload": {"psr-4":{
+		"PojetEmcomp\\":"vendor/ProjetoEmcop",
+		"App":"App"
+		}
+	},
+	"config": {"bin-dir": "bin"}
+}
