@@ -9,20 +9,17 @@ class Connection
 	public $conn;
 	function __construct()
 	{
-		$host = "127.0.0.1";
-		$db_name = "bdschedules";
-		$username = "root";
-		$password = "";
-		$conn;
+		$this->host = "localhost";
+		$this->db_name = "bdschedules";
+		$this->username = "root";
+		$this->password = "";
+		$this->conn=NULL;
 	}
 	public  function getConn(){
-		$this->conn = null;
-		try {
+		if ($this->conn == NULL) {
+			
 			$this->conn = new PDO("mysql:host=".$this->host.";dbname=".$this->db_name,$this->username,$this->password);
 
-			$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		} catch (PDOException $exception) {
-			echo "Connection error: " . $exception->getMessage();
 		}
 
 		return $this->conn;

@@ -41,7 +41,7 @@
 					//velida os dados do usuario
 					
 					if ($vl->verifyLogin($username,$password)) {
-						echo "logouu";
+						header('location:'.DIRPAGE.'/home');
 					}
 					else{
 						echo "string";

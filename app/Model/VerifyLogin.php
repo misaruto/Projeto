@@ -34,14 +34,14 @@ class VerifyLogin
 		$password = md5($pass);
 		$con = new Connection; 	 	
 		$con = $con->getConn();
-		$sql = "SELECT * FROM users WHERE `username` = ':u' AND `password` = ':p'";
-		$con->prepare($sql);
-		$con->bindParam(':u', $user, PDO::PARAM_STR, 200);
-		$con->bindParam(':p',$password, PDO::PARAM_STR,32);
-		$con->execute();
-		if ($con->rowCount() == 1) {
+		$sql = "SELECT * FROM users WHERE `username` = :u AND `password` = :p";
+		$stmt = $con->prepare($sql);
+		$stmt->bindParam(':u', $user, PDO::PARAM_STR, 200);
+		$stmt->bindParam(':p',$password, PDO::PARAM_STR,32);
+		$stmt->execute();
+		if ($stmt->rowCount() == 1) {
 			$result = new VerifyLogin;
-			$result->copia($con->fetch(PDO::FETCH_OBJ));
+			$result->copia($stmt->fetch(PDO::FETCH_OBJ));
 			session_start();
 			$_SESSION['id'] = $result->id;
 			$_SESSION['username'] = $result->username;
