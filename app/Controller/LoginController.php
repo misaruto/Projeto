@@ -9,12 +9,19 @@
 
 		function __construct()
 		{
-			$this->setTitle("Login"); 
-			$this->setDescritpion("pagina de login");
-			$this->setKeywords("login");
-			$this->setDir("View/"); 
-			$this->renderLayout();
-			self::index();
+			session_start();
+
+			if (isset($_SESSION['id'])) {
+				header('location:'.DIRPAGE.'home');	
+			}
+			else{
+				$this->setTitle("Login"); 
+				$this->setDescritpion("pagina de login");
+				$this->setKeywords("login");
+				$this->setDir("View/"); 
+				$this->renderLayout();
+				self::index();
+			}
 
 		}
 		public function index()
@@ -27,7 +34,6 @@
 			if ((isset($_POST['username']))&&(isset($_POST['password']))&&(isset($_POST['g-recaptcha-response']))) {
 				//Instancia um objeto de verificação do captcha
 				$validate = new Captcha;
-				echo "aaaa";
 				//cria variaveis locais para verificação
 				$username = $_POST['username'];
 				$password = $_POST['password'];
@@ -41,23 +47,22 @@
 					//velida os dados do usuario
 					
 					if ($vl->verifyLogin($username,$password)) {
-						header('location:'.DIRPAGE.'/home');
+						header('location:'.DIRPAGE.'home');
 					}
 					else{
-						echo "string";
 						return false;
 					}
 				}
-				else{
-					return false;
-				}
-
-			}
 			else{
 				return false;
 			}
+
 		}
-		
+		else{
+			return false;
+		}
 	}
 
-	?>
+}
+
+?>

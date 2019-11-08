@@ -58,7 +58,7 @@ class Render
 	#metodo adciona caracteristicas especificas no main
 	public function addMain()
 	{
-		# code...
+		
 	}
 	#metodo adciona caracteristicas especificas no footer
 	public function addFooter()

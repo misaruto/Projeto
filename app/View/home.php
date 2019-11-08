@@ -1,9 +1,6 @@
 <div class="nav-bar">
-	<?php 
-	include 'app/View/nav.php';
-
-	?>
+	{{nav-area}}
 </div>
 <div class="">
-	
+	{{dinamic-area}}
 </div>

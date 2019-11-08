@@ -15,8 +15,9 @@ class CrudSchedulesController extends Render
 		$this->renderLayout();
 	}
 	public function cadastrar()
-	{
-		require_once 'app/View/cadastrar.php';
+	{	
+		include 'app/View/nav.php';
+		require_once 'app/View/cadastroHorarios.php';
 	}
 }
 
