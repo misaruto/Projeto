@@ -1,7 +1,7 @@
 <div class="login" id="login">
 	<div  id="loader" hidden></div>
 	<div class="loginContainer" id="loginContainer">
-		<form id="loginForm" method="POST" action="<?=DIRPAGE?>login/verify">
+		<form id="loginForm" onsubmit="">
 
 			<br>
 			<input type="text" name="username" id="username" placeholder="Username" required>
@@ -13,7 +13,7 @@
 				<p hidden id="alert" style="color:#f00; font-size: 19px; font-family: arial; background-color: #000;">&emsp;</p>
 			</center>
 			<br>
-			<button type="submit">Login</button>
+			<button id="btnSubmitLogin">Login</button>
 			<br>
 			<a href="">Cadastre-se</a>
 		</form>

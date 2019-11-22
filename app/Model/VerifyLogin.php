@@ -42,7 +42,7 @@ class VerifyLogin
 		if ($stmt->rowCount() == 1) {
 			$result = new VerifyLogin;
 			$result->copia($stmt->fetch(PDO::FETCH_OBJ));
-			session_start();
+			
 			$_SESSION['id'] = $result->id;
 			$_SESSION['username'] = $result->username;
 			return true;

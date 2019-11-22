@@ -15,12 +15,15 @@
 				header('location:'.DIRPAGE.'home');	
 			}
 			else{
-				$this->setTitle("Login"); 
-				$this->setDescritpion("pagina de login");
-				$this->setKeywords("login");
-				$this->setDir("View/"); 
-				$this->renderLayout();
-				self::index();
+				if (empty($_POST)) {
+					
+					$this->setTitle("Login"); 
+					$this->setDescritpion("pagina de login");
+					$this->setKeywords("login");
+					$this->setDir("View/"); 
+					$this->renderLayout();
+					self::index();
+				}
 			}
 
 		}
@@ -47,22 +50,25 @@
 					//velida os dados do usuario
 					
 					if ($vl->verifyLogin($username,$password)) {
-						header('location:'.DIRPAGE.'home');
+						json_encode(true);
+						echo "true";
 					}
 					else{
-						return false;
+						echo "false";
 					}
 				}
-			else{
-				return false;
-			}
+				else{
+					echo "false";
 
+				}
+
+			}
+			else{
+				echo "false";
+
+			}
 		}
-		else{
-			return false;
-		}
+
 	}
 
-}
-
-?>
+	?>
