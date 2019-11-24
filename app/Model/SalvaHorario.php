@@ -1,11 +1,7 @@
 <?php 
-/**
- * 
- */
 require_once "app/lib/Database/Connection.php";
-class SalvaHorario extends
+class SalvaHorario
 {
-	private $id;
 	private $id_user;
 	private $name;
 	private $description;
@@ -20,18 +16,45 @@ class SalvaHorario extends
 	public function setInitialDate($i_date){  $this->i_date = $i_date; }
 	public function setFinalTime($f_time){  $this->f_time = $f_time; }
 	public function setFinalDate($f_date){  $this->f_date = $f_date; }
-	public function copia($schedules,$idUser){
-		$this->id_user = $idUser;
-		$this->name = $schedules['name'];
-		$this->description = $schedules['desc'];
-		$this->i_time = $schedules['h-inicial'];
-		$this->i_date = $schedules['d-inicial'];
-		$this->f_time = $schedules['h-final'];
-		$this->f_date = $schedules['d-final'];
-}
+
+	public function getIdUser(){ return $this->id_user; }
+	public function getName(){ return $this->name; }
+	public function getDescription(){ return $this->description; }
+	public function getInitialTime(){ return $this->i_time; }
+	public function getInitialDate(){ return $this->i_date; }
+	public function getFinalTime(){ return $this->f_time; }
+	public function getFinalDate(){ return $this->f_date; }
+	
+
 	public function salvar($post,$idUser){
-		$schedule = $this->copair($post,$idUser);
-		var_dump($schedule);
+
+		$nome = $post['nome'];
+		$desc = $post['desc'];
+		$hInicial = $post['h-inicial'];
+		$dInicial = $post['d-inicial'];
+		$hFinal = $post['h-final'];
+		$dFinal = $post['d-final'];
+
+		$con = new Connection;
+		$con = $con->getConn();
+		$sql = "INSERT INTO `schedules`(`id_user`, `name`, `description`, `initial_date`, `final_date`, `initial_time`, `final_time`) VALUES (?,?,?,?,?,?,?)";
+		$stmt = $con->prepare($sql);
+
+		$stmt->bindParam(1,$idUser);
+		$stmt->bindParam(2,$nome);
+		$stmt->bindParam(3,$desc);
+		$stmt->bindParam(4,$dInicial);
+		$stmt->bindParam(5,$dFinal);
+		$stmt->bindParam(6,$hInicial);
+		$stmt->bindParam(7,$hFinal);
+		
+
+		if ($stmt->execute()) {
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 }
 

@@ -27,13 +27,14 @@ class HomeController extends Render
 		$home = file_get_contents('app/View/home.php');
 		$nav = str_replace("{{DIRPAGE}}", DIRPAGE, $nav);
 		$home = str_replace("{{nav-area}}", $nav, $home);
+		$home = str_replace("{{DIRJS}}", DIRJS, $home);
 		$id = $_SESSION['id'];
 		$schedules = new Schedules;
 		$center = $schedules->select($id);
 		$itens = "";
 		foreach ($center as $value) {
 			$itens = $itens."
-			<tr>
+			<tr onclick='select(".$value->id.")' title='Clique para editar'>
 			<td>
 			".$value->name."
 			</td>

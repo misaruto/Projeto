@@ -25,7 +25,7 @@ class Schedules
 		$this->f_time = 0;
 		$this->f_date = 0;
 	}
-#	public function getId(){ return $this->id; }
+	public function getId(){ return $this->id; }
 #	public function getIdUser(){ return $this->id_user; }
 	public function getName(){ return $this->name; }
 	public function getDescription(){ return $this->description; }
@@ -33,7 +33,8 @@ class Schedules
 	public function getInitialDate(){ return $this->i_date; }
 	public function getFinalTime(){ return $this->f_time; }
 	public function getFinalDate(){ return $this->f_date; }
-
+	
+	public function setId($id){  $this->id = $id; }
 	public function setName($name){  $this->name = $name; }
 	public function setDescription($desc){  $this->description = $desc; }
 	public function setInitialTime($i_time){  $this->i_time = $i_time; }

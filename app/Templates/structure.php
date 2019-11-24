@@ -19,8 +19,6 @@
 		
 	</div>
 </body>
-<!--Script local-->
-<script type="text/javascript" src="<?=DIRJS?>script.js"></script>
 <!--Script do reCATPTCHA da google-->
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <!--JAVA-SCRIPT BOOTSTRAP-->

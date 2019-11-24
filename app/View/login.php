@@ -30,5 +30,6 @@
     alert.textContent = "Complete o captcha primeiro";
 }
 }
-
 </script>
+<!--Script local-->
+<script type="text/javascript" src="<?=DIRJS?>login.js"></script>

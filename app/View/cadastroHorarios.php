@@ -59,3 +59,5 @@
     </table>
   </form>
 </div>
+<!--Script local-->
+<script type="text/javascript" src="{{js-directory}}schedules.js"></script>

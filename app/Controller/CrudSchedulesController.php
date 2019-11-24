@@ -28,6 +28,7 @@ class CrudSchedulesController extends Render
 			$home = file_get_contents('app/View/cadastroHorarios.php');
 			$nav = str_replace("{{DIRPAGE}}", DIRPAGE, $nav);
 			$home = str_replace("{{nav-area}}", $nav, $home);
+			$home = str_replace("{{js-directory}}", DIRJS, $home);
 			echo $home;
 		}
 		else{
@@ -37,14 +38,26 @@ class CrudSchedulesController extends Render
 				$new = new SalvaHorario;
 
 				$salva = $new->salvar($_POST,$_SESSION['id']);
-				var_dump($salva);
 				if ($salva) {
-					echo "salvo";
+					echo 1;
+				}
+				else{
+					echo 0;
 				}
 			}
 			else{
-				return 0;
+				return false;
 			}
+		}
+	}
+	public function editar($id_schedule)
+	{
+		require_once("app/Model/EditaHorario");
+		$edit = new EditaHorario;
+		if (empty($_POST)) {
+			//retorna um array contendo os campos de um hoario
+			$schedule = $edit->getHorario($id_schedule);
+			json_encode($schedule);
 		}
 	}
 }
