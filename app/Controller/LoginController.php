@@ -68,6 +68,13 @@
 
 			}
 		}
+		public function logout(){
+			session_start();
+			$_SESSION['id'] = "";
+			$_SESSION['username']='';
+			session_destroy();
+			session_unset();
+		}
 
 	}
 

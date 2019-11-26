@@ -1,3 +1,4 @@
+var domain = document.domain;
 $(document).ready(function() {
   $("#btnSubmitLogin").click(function(event) {
    event.preventDefault();
@@ -7,7 +8,7 @@ $(document).ready(function() {
    var usr = $('#username').val();
    console.log(usr);
    $.ajax({
-            url:'http://127.0.0.1/Projeto/login/verify', //o arquivo para o qual deseja fazer a requisição
+            url:'http://'+domain+'/Projeto/login/verify', //o arquivo para o qual deseja fazer a requisição
             type: "POST", //metodo de envio
             data: {
             username:$('#username').val(), //input de onde deseja pegar a informação

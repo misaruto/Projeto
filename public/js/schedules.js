@@ -1,11 +1,11 @@
+var domain = document.domain;
 $(document).ready(function(){
   $("#btnSubmitCadastroSchedules").click(function(event){
     event.preventDefault();
     var dados = $("#formCadastroSchedules").serializeArray();
-    console.log(dados);
     $.ajax({
       type: "POST",
-      url: "http://127.0.0.1/Projeto/horarios/cadastrar",
+      url: "http://"+domain+"/Projeto/horarios/cadastrar",
       data: dados,
       success: function(resposta){
       console.log(resposta);

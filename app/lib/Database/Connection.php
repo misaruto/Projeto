@@ -14,6 +14,7 @@ class Connection
 		$this->username = "root";
 		$this->password = "";
 		$this->conn=NULL;
+		self::getConn();
 	}
 	public  function getConn(){
 		if ($this->conn == NULL) {

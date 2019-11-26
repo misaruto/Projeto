@@ -21,6 +21,18 @@ class CrudSchedulesController extends Render
 			}
 		}
 	}
+
+	public function detalhar($id){
+		$id = implode('',$id);
+		require_once("app/Model/EditaHorario.php");
+		//reutiliza a função que retorna um horario que tem o id passado como parametro
+		$see = new EditaHorario;
+			//retorna um array contendo os campos de um hoario
+		$schedule = $see->getHorario($id);
+
+		echo json_encode($schedule);
+	}
+
 	public function cadastrar()
 	{	
 		if (empty($_POST)) {
@@ -52,13 +64,41 @@ class CrudSchedulesController extends Render
 	}
 	public function editar($id_schedule)
 	{
-		require_once("app/Model/EditaHorario");
+		require_once("app/Model/EditaHorario.php");
 		$edit = new EditaHorario;
-		if (empty($_POST)) {
+		$id = implode('',$id_schedule);
+		if ($id != 0) {
 			//retorna um array contendo os campos de um hoario
-			$schedule = $edit->getHorario($id_schedule);
-			json_encode($schedule);
+			$schedule = $edit->getHorario($id);
+			
+			echo json_encode($schedule);
 		}
+		else{
+			
+			$schedule = $edit->saveEditions($_POST);
+			if ($schedule) {
+				echo 1;
+			}
+			else{
+				echo 0;
+			}
+		}
+	}
+
+	public function deletar()
+	{
+		//verifica a existencia do id do usuario na sessão e se enviou o id do horario que quer apagar.
+		if ((isset($_SESSION['id']))&&(isset($_POST['id']))) {
+			require_once 'app/Model/DeletarHorario.php';
+			$del = new DeletarHorario;
+			$res = $del->deletar($_POST['id'],$_SESSION['id']);
+			if ($res) {
+				echo 1;
+			}
+			else{
+				echo 0;
+			}
+		}	
 	}
 }
 

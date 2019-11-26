@@ -9,17 +9,24 @@ class HomeController extends Render
 		session_start();
 
 		if (isset($_SESSION['id'])) {
-			$this->setTitle("Home"); 
-			$this->setDescritpion("Pagina Home");
-			$this->setKeywords("home");
-			$this->setDir("View/"); 
-			$this->renderLayout();
-			self::index();
+			if (empty($_POST)) {
+				$this->setTitle("Home"); 
+				$this->setDescritpion("Pagina Home");
+				$this->setKeywords("home");
+				$this->setDir("View/"); 
+				$this->renderLayout();
+				self::index();
+			}
 		}
 		else{
 			header("location:".DIRPAGE."login");
 		}
 
+	}
+	public function reload(){
+		require_once  "app/View/HomeAjax.php";
+		$exit = call_user_func('reloadBody');
+		echo $exit;
 	}
 	public function index()
 	{
@@ -32,25 +39,48 @@ class HomeController extends Render
 		$schedules = new Schedules;
 		$center = $schedules->select($id);
 		$itens = "";
-		foreach ($center as $value) {
-			$itens = $itens."
-			<tr onclick='select(".$value->id.")' title='Clique para editar'>
-			<td>
-			".$value->name."
-			</td>
-			<td>
-			".$value->initial_date."
-			</td>
-			<td>
-			".$value->final_date."
-			</td>
-			<td>
-			".$value->initial_time."
-			</td>
-			<td>
-			".$value->final_time."
+		if ($center == NULL) {
+			$itens = "
+			<tr>
+			<td colspan=6>
+			<div class='alert alert-info'>
+			<center>
+			<b>
+			Nenhum horário encontrado
+			</b>
+			</center>
+			</div>
 			</td>
 			</tr>";
+		}
+		else{
+			foreach ($center as $value) {
+				$data_inicio = date('d/m/Y',strtotime($value->initial_date));
+				$data_fim = date('d/m/Y',strtotime($value->final_date));
+				$itens = $itens."
+				<tr class='tr' >
+				<td onclick='detalhar(".$value->id.")' title='Clique duas vezes para editar'>
+				<center>".$value->name."</center>
+				</td>
+				<td onclick='detalhar(".$value->id.")' title='Clique para editar'>
+				<center>".$data_inicio."</center>
+				</td>
+				<td onclick='detalhar(".$value->id.")' title='Clique para editar'>
+				<center>".$data_fim."</center>
+				</td>
+				<td onclick='detalhar(".$value->id.")' title='Clique para editar'>
+				<center>".$value->initial_time."</center>
+				</td>
+				<td onclick='detalhar(".$value->id.")' title='Clique para editar'>
+				<center>".$value->final_time."</center>
+				</td>
+				<td>
+				<button onclick='deletar(".$value->id.")' class='btn btn-outline-danger btn-block'>
+				Deletar
+				</button>
+				</td>
+				</tr>";
+			}
 		}
 		$home = str_replace("{{dinamic-area}}", $itens, $home);
 		echo $home;
