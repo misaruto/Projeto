@@ -15,7 +15,7 @@
 			<br>
 			<button id="btnSubmitLogin">Login</button>
 			<br>
-			<a href="">Cadastre-se</a>
+			<a href="<?=DIRPAGE?>usuarios/cadastro">Cadastre-se</a>
 		</form>
 	</div>
 </div>

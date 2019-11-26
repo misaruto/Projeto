@@ -1,9 +1,9 @@
 var domain = document.domain;
-
+var pasta = "Projeto";
 function reload(argument) {
 	$(document).ready(function(){
 		$.ajax({
-			url:"http://"+domain+"/Projeto/home/reload",
+			url:"http://"+domain+"/"+pasta+"/home/reload",
 			type:"POST",
 			data:'0',
 			success:function(resposta){
@@ -46,7 +46,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		var dados = $("#formEdit").serializeArray();
 		$.ajax({
-			url:"http://"+domain+"/Projeto/horarios/editar/0",
+			url:"http://"+domain+"/"+pasta+"/Projeto/horarios/editar/0",
 			type:"POST",
 			data:dados,
 			success: function(resposta){
@@ -83,7 +83,7 @@ function deletar(id){
 		//event.stopImmediatePropagation();
 		//event.preventDefault();
 		$.ajax({
-			url:"http://"+domain+"/Projeto/horarios/deletar",
+			url:"http://"+domain+"/"+pasta+"/horarios/deletar",
 			type:"POST",
 			data:{
 				'id':id
@@ -107,7 +107,7 @@ function deletar(id){
 /*#######Função de Detalhamento - Inicio######*/
 function detalhar(id){
 	$.ajax({
-		url:"http://"+domain+"/Projeto/horarios/detalhar/"+id,
+		url:"http://"+domain+"/"+pasta+"/horarios/detalhar/"+id,
 		type:"POST",
 		data:{id},
 		success: function(resposta) {

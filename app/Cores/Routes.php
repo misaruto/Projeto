@@ -29,7 +29,7 @@
 		public function getRoute()
 		{
 			$this->routes = array("" => "LoginController",
-				"login"=>"LoginController","home"=>"HomeController","horarios"=>"CrudSchedulesController");
+				"login"=>"LoginController","home"=>"HomeController","horarios"=>"CrudSchedulesController","usuarios"=>"CrudUsersController");
 			$this->url = new UrlTrait();
 			$index = $this->url->traitUrl();
 			$aux = $index[0];
