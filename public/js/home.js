@@ -16,7 +16,7 @@ function reload(argument) {
 /*#######Funções de edição - Inicio######*/
 function select(id) {
 	$.ajax({
-		url:"http://"+domain+"/Projeto/horarios/editar/"+id,
+		url:"http://"+domain+"/"+pasta+"/horarios/editar/"+id,
 		type:"POST",
 		data:{id},
 		success: function(resposta) {
@@ -46,11 +46,11 @@ $(document).ready(function(){
 		event.preventDefault();
 		var dados = $("#formEdit").serializeArray();
 		$.ajax({
-			url:"http://"+domain+"/"+pasta+"/Projeto/horarios/editar/0",
+			url:"http://"+domain+"/"+pasta+"/horarios/editar/0",
 			type:"POST",
 			data:dados,
 			success: function(resposta){
-				//console.log(resposta);
+				console.log(resposta);
 				if (resposta == 1) {
 					alert("Editado com sucesso");
 					$("#formEdit").each( function(){
